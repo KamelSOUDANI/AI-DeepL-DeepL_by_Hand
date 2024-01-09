@@ -91,3 +91,53 @@ For\ W_2, X_2 = 2, X_2 = 3:, X_2=7\\
 For\ b:\\
 ∂MSE/∂b=(-0.86 \times 0.244 \times 0.2)+(1.525 \times 0.244 \times 0.2) +(-3.29 \times 0.122 \times 0.2)\\
 
+
+// Equations for identity activation function :
+
+Identity\ activation\ function : f(Z)=Z\\
+(∂Y_{\text{pred}}/∂Z)=∂f(Z)/∂Z=1 \\
+General\ expressions:\\
+∂MSE/∂W_{1} =(1/n)\sum_{1}^{n} \times (Y_{pred}-Y_{true}) \times X_1 \\
+∂MSE/∂W_{2}=(1/n)\sum_{1}^{n} \times (Y_{pred}-Y_{true}) \times X_2 \\
+∂MSE/∂b =(1/n)\sum_{1}^{n} \times (Y_{pred}-Y_{true}) \times b \\
+\\
+For\ W_1, X_1 = 1, X_1 = 2; X_1=:3\\
+∂MSE/∂W_{1}=(-0.3-3) \times 1+(-0.3-5) \times 2+(-1.8-10) \times 3=-16.43\\
+For\ W_2, X_2 = 2, X_2 = 3:, X_2=7\\
+∂MSE/∂W_{2}=(-0.3-3) \times 2+(-0.3-5) \times 3+(-1.8-10) \times 7=-35.03\\
+For\ b:\\
+∂MSE/∂b=(-0.3-3) \times 1+(-0.3-5) \times 1 +(-1.8-10) \times 1=-6.80\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
