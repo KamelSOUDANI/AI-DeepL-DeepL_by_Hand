@@ -4,66 +4,109 @@ X_{2}=[3,4,5]\\
 Y =[5.85,7.6,10.25] \\
 Y= 0.25  \times X_{1}^{2}+0.2 \times X_{1 }\times X_{2} + 5
 
-Normalised\ data : \\
-(X - X_{min})/(X_{max} - X_{min})\ and\ (Y - Ymin)/(Y_{max}-Y_{min})\\
+After\ normalisation\ of\ data\ using\ the\ following\ expresssions:\\
+X_{normalised} = (X - X_{min})/(X_{max} - X_{min})\\ 
+Y_{normalised}=(Y - Ymin)/(Y_{max}-Y_{min})\\
 
-X1 = [0. , 0.5, 1.] \\
-X2 = [0. , 0.5, 1.] \\
+X_{1} = [0. , 0.5, 1.] \\
+X_{2} = [0. , 0.5, 1.] \\
 Y = [ 0., 0.397, 1.]\\
-
 
 From\ X_{1}\ and\ X_{2}\ to\ the\ first\ hidden\ layer:\\
 
 \omega_{11}, \omega_{21}, \omega_{12}, \omega_{22} \\
--0.25,0.90,0.46,0.20\\
-
-From\ A_{11}\ and\ A_{12}\ to\ the\ second\ hidden\ layer:\\
+-0.251,  0.901, 0.464,  0.197\\
+From\ the\ first\ hidden\ layer \ to\ the\ second\ hidden\ layer:\\
 
 \omega_{31}, \omega_{41}, \omega_{32}, \omega_{42}\\
+-0.688, -0.688, -0.884,  0.732\\
 
--0.69,-0.69,-0.88,0.73\\
-From\ A_{21}\ and\ A_{22}\ to\ the\ Output\ layer:\\
+From\ the \ second \ hidden \ layer\ to\ the\ Output\ layer \ Y_{pred}:\\
  \omega_{51}, \omega_{52} \\
-0.20,0.42,
+0.202,0.416,
 \\
+
 Bias :\\
 b_{1}, b_{2}, b_{3}, b_{4}\\
+-0.959,  0.940,   0.665, -0.575
 
--0.96,0.94,0.65,-0.58
 
 Learning\ rate\ \alpha = 0.1\\
 Activation\ function : Sigmoid\ function\:\\
 \sigma(Z) = 1/(1+e^{-Z})
 
 
-For\ X_{1}=0, X_{2}=0\ and\ Y_{true}= 0\\
 
 
 From\ X_{1}\ and\ X_{2}\ to\ the\ first\ hidden\ layer:\\
-
+Left\ side\ of\ the\ first\ hidden\ layer:\\
 Z_{11} = \omega_{11}\times\ X_{1}+ \omega_{12}\times\ X_{2} + b_{1} \\
--0.25\times\ 0+0.46\times\ 0-0.96 =-0.96\\
+Z_{12} = \omega_{21}\times\ X_{1}+ \omega_{22}\times\ X_{2} + b_{2}\\
 
-Z_{12} = \omega_{21}\times\ X1+ \omega_{22}\times\ X2 + b_{2}\\
-0.90\times\ 0+0.20\times\ 0+0.94=0.94\\
+Right\ side\ of\ the\ first\ hidden\ layer\ after\ activation\ of\ neurons :\\
 
-A_{11}=\sigma(Z_{1})=1/(1+e^{0.96}) =0.276\\
-A_{12}= \sigma(Z_{2})=1/(1+e^{-0.94})=0.719\\
+A_{11}=\sigma(Z_{11})\\
+A_{12}= \sigma(Z_{12})\\
+\\
+Left\ side\ of\ the\ second\ hidden\ layer\ using\ A_{11 }\ and\ A_{12}\ as\ inputs\ to\ the\ two\ neurons :\\
 
-From\ A_{11} \ and\ A_{12}\ output\ to\ the\ second \ hidden \ layer: \\
 Z_{21}=A_{11} \times \omega_{31}+A_{12} \times \omega_{32}+b_{3}\\
-Z_{21}=0.276 \times -0.69+0.719 \times -0.88+0.65=-0.162\\
-
 Z_{22}=A_{11} \times \omega_{41}+A_{12} \times \omega_{42}+b_{4}\\
-Z_{22}=0.276 \times -0.69+0.719 \times 0.73-0.58=-0.246\\
+Right\ side\ of\ the\ second\ hidden\ layer\ after\ activation\ of\ neurons :\\
+A_{21} = \sigma(Z_{21})\\
+    A_{22} = \sigma(Z_{22})\\
+\\
+Output:\\
+Y_{pred} = A_{21} \times w_{51} + A_{22} \times w_{52}\\
 
 
-A_{21} = \sigma(Z_{21})=0.46\\
-    A_{22} = \sigma(Z_{22})=0.44\\
-\\
-    Y_{pred} = A_{21} \times w_{51} + A_{22} \times w_{52}\\
-     Y_{pred} = 0.46 \times 0.20 + 0.44 \times0.42 =0.278\\
-\\
+
+From\ X_{1}\ and\ X_{2}\ to\ the\ first\ hidden\ layer:\\
+X_{1} = [0. , 0.5, 1.] \\
+X_{2} = [0. , 0.5, 1.] \\
+\omega_{11}, \omega_{21}, \omega_{12}, \omega_{22} \\
+-0.251,  0.901, 0.464,  0.197\\
+b_{1}, b_{2}, b_{3}, b_{4}\\
+-0.959,  0.940,   0.665, -0.575\\
+Z_{11} = \omega_{11}\times\ X_{1}+ \omega_{12}\times\ X_{2} + b_{1} \\
+\\ For\ each \ value\ of\ X_{1}\ and \ X_{2}:\\
+Z_{11}=-0.251*0.0+0.464*0.0-0.959=-0.959\\
+Z_{11}=-0.251*0.5+0.464*0.5-0.959=-0.853\\
+Z_{11}=-0.251*1+0.464*1-0.959=-0.746\\
+
+
+Z_{12} = \omega_{21}\times\ X_{1}+ \omega_{22}\times\ X_{2} + b_{2}\\
+Z_{12}=0.901*0.0+0.197*0.0+0.940=0.940\\
+Z_{12}=0.901*0.5+0.197*0.5+0.940=1.489\\
+Z_{12}=0.901*1+0.197*1+0.940=2.038\\
+A_{11}=\sigma(Z_{11})\\
+A_{11}=1/(1+e{^{(-0.9409)}})=0.277\\
+A_{11}=1/(1+e{^{(-1.489)}})=0.299\\
+A_{11}=1/(1+e{^{(-2.038)}})=0.322\\
+
+A_{12}= \sigma(Z_{12})\\
+
+A_{12}=1/(1+e^{(0.959)})=0.719\\
+A_{12}=1/(1+e^{(0.853)})=0.816\\
+A_{121}=1/(1+e^{(0.746)})=0.885\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 For\ X_{1}=0.5, X_{2}=0.5\ and\ Y_{true}= 0.397\\
 Z11=-0.852;\ Z12=1.489; \ A11=0.299;\ A12=0.816\\
