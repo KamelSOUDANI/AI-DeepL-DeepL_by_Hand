@@ -88,45 +88,51 @@ A_{12}= \sigma(Z_{12})\\
 
 A_{12}=1/(1+e^{(0.959)})=0.719\\
 A_{12}=1/(1+e^{(0.853)})=0.816\\
-A_{121}=1/(1+e^{(0.746)})=0.885\\
+A_{12}=1/(1+e^{(0.746)})=0.885\\
 
 
 
+Z_{21} = \omega_{31}\times\ A_{11}+ \omega_{32}\times\ A_{12} + b_{3}\\
+Z_{22} = \omega_{41}\times\ A_{11}+ \omega_{42}\times\ A_{12} + b_{4}\\
+\omega_{31}, \omega_{41}, \omega_{32}, \omega_{42}\\
+-0.688, -0.688, -0.884,  0.732\\
+b_{3}, b_{4}\\
+0.665, -0.575\\
+Z_{21}=-0.688*0.277-0.884*0.719+0.665=-0.161\\
+Z_{21}=-0.688*0.299-0.884*0.816+0.665=-0.262\\
+Z_{21}=-0.688*0.322-0.884*0.885+0.665=-0.338\\
+
+Z_{22}=-0.688*0.277+0.732*0.719-0.575=-0.239\\
+Z_{22}=-0.688*0.299+0.732*0.816-0.575=-0.183\\
+Z_{22}=-0.688*0.322+0.732*0.885-0.575=-0.148\\
+
+
+A_{21} = \sigma(Z_{21})\\
+A_{21}=1/(1+e{^{(0.161)}})=0.460\\
+A_{21}=1/(1+e{^{(0.262)}})=0.435\\
+A_{21}=1/(1+e{^{(0.335)}})=0.416\\
+A_{22} = \sigma(Z_{22})\\
+A_{22}=1/(1+e{^{(0.239)}})=0.440\\
+A_{22}=1/(1+e{^{(0.183)}})=0.454\\
+A_{22}=1/(1+e{^{(0.148)}})=0.463\\
 
 
 
+Output:\\
+Y_{pred} = A_{21} \times w_{51} + A_{22} \times w_{52}\\
+ \omega_{51}, \omega_{52} \\
+0.202,0.416\\
 
-
-
-
-
-
-
-
-
-
-
-
-
-For\ X_{1}=0.5, X_{2}=0.5\ and\ Y_{true}= 0.397\\
-Z11=-0.852;\ Z12=1.489; \ A11=0.299;\ A12=0.816\\
-Z21=-0.262;\ Z22=-0.183; \ A21=0.435;\ A22=0.454\\
-Ypred=0.276\\
-
-For\ X_{1}=1, X_{2}=1\ and\ Y_{true}= 1\\
-Z11=-0.746;\ Z12=2.038; \ A11=0.322;\ A12=0.884\\
-Z21=-0.339;\ Z22=-0.149; \ A21=0.416;\ A22=0.46\\
-Ypred=0.276
+Y_{pred_1}=0.202*0.460+0.416*0.440=0.276\\
+Y_{pred_2}=0.202*0.435+0.416*0.454=0.277\\
+Y_{pred_3}=0.202*0.416+0.416*0.463=0.277\\
 
 
 
 MSE = (1/2n) \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})^{2} :\\
 
 MSE =(1/ (2 \times 3))\times[((Y_{\text{pred}_1}-Y_{\text{true}_1})^{2})+((Y_{\text{pred}_2}-Y_{\text{true}_2})^{2})+((Y_{\text{pred}_3}-Y_{\text{true}_3})^{2})]\\
-1/6 \times [(0-0.276)^{2}+(0.397-0.276)^{2}+(1-0.276)^{2})]=0.10
-
-For\ a\ parameter\ p\ (\omega_{ij}\ and\ b_{k}), the\ effect\ of\ p\ on\ MSE:\
-\delta\ MSE/\delta\ p
+1/6 \times [(0-0.276)^{2}+(0.397-0.277)^{2}+(1-0.277)^{2})]=0.1022
 
 For\ \omega_{51} : ∂MSE/∂\omega_{51} = (∂MSE/∂Y_{\text{pred}}) \times (∂Y_{\text{pred}}/∂\omega_{51})  \\
 or\ (∂MSE/∂Y_{\text{pred}}) = ∂[(1/2n) \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})^{2}]/∂Y_{\text{pred}} = (1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})\\
@@ -134,62 +140,95 @@ or\ (∂MSE/∂Y_{\text{pred}}) = ∂[(1/2n) \sum_{1}^{n}(Y_{\text{pred}}-Y_{\te
 We\ can \ derive\ the \ mathematical \ expressions\ of :\\
 ∂MSE/∂\omega_{51} = (1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times (∂Y_{\text{pred}}/∂\omega_{51}) =\\(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times\ ∂(A_{21} \times w_{51} + A_{22} \times w_{52})/∂\omega_{51}=
  \\(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times\ A_{21}\\
-Considering\ all\ the\ values\ taken\ by\ the\ two\ input\ variables\ X_{1}\ and\ X_{2}
-\\
 \\
 In\ the\ same \ way:\\
 For\ \omega_{52} : ∂MSE/∂\omega_{52} =(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times\ A_{22}\\
 \\
- ∂MSE/∂\omega_{51} =(1/3)\times ((0.276-0)\times 0.46+(0.276-0.397)\times 0.435+(0.276-1)\times0.416)=-0.756\\
- ∂MSE/∂\omega_{52} =(1/3)\times ((0.276-0)\times 0.44+(0.276-0.397)\times 0.454+(0.276-1)\times0.46)=-0.088\\
+ ∂MSE/∂\omega_{51} =(1/3)\times ((0.276-0)\times 0.460+(0.277-0.397)\times 0.435+(0.277-1)\times0.416)=-0.075 \\
+ ∂MSE/∂\omega_{52} =(1/3)\times ((0.276-0)\times 0.44+(0.277-0.397)\times 0.454+(0.277-1)\times0.463)=-0.089 \\
+ \\
+ 
 
  
  ∂MSE/∂\omega_{31}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{21} \times ∂A_{21}/∂Z_{21} \times ∂Z_{21}/∂\omega_{31}\\
-∂MSE/∂\omega_{32}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{21} \times ∂A_{21}/∂Z_{21} \times ∂Z_{21}/∂\omega_{32}\\
+ ∂MSE/∂\omega_{32}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{21} \times ∂A_{21}/∂Z_{21} \times ∂Z_{21}/∂\omega_{32}\\
+ 
+ ∂MSE/∂Y_{pred}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})\\
+ 
+ ∂Y_{pred}/∂A_{21}=∂(A_{21} \times w_{51} + A_{22} \times w_{52})/∂A_{21}=w_{51}\\
+ ∂A_{21}/∂Z_{21}=∂\sigma(Z_{21})/∂Z_{21}=\sigma(Z_{21})\times (1-\sigma(Z_{21}))\\
+ ∂Z_{21}/∂\omega_{31}=∂(A_{11} \times \omega_{31}+A_{12} \times \omega_{32}+b_{3})/∂\omega_{31}=A_{11}\\
+ 
+ ∂MSE/∂\omega_{31}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times A_{11} \times \sigma(Z_{21})\times (1-\sigma(Z_{21})) \\
+ 
+ ∂MSE/∂\omega_{32}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times A_{12} \times \sigma(Z_{21})\times (1-\sigma(Z_{21})\\
+ 
+ 
+ ∂MSE/∂\omega_{31}=(1/3) \times [((0.276-0)\times 0.202 \times 0.277 \times 0.460\times(1-0.460))+...\\(((0.277-0.397)\times0.202 \times0.299\times 0.435 \times(1-0.435))+...\\
+ ((0.277-1)\times0.202\times0.322 \times0.416 \times(1-0.416))]=-0.003\\
+ ∂MSE/∂\omega_{32}=-0.009\\
+ \\
+ 
+ ∂MSE/∂\omega_{41}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂\omega_{41}\\
+ ∂MSE/∂\omega_{42}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂\omega_{42}\\
+ 
+ ∂MSE/∂Y_{pred}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})\\
+ ∂Y_{pred}/∂A_{22}=∂(A_{21} \times w_{51} + A_{22} \times w_{52})/∂A_{22}=w_{52}\\
+ ∂A_{22}/∂Z_{22}=∂\sigma(Z_{22})/∂Z_{22}=\sigma(Z_{22})\times (1-\sigma(Z_{22}))\\
+ ∂Z_{22}/∂\omega_{41}=∂(A_{11} \times \omega_{41}+A_{12} \times \omega_{42}+b_{4})/∂\omega_{41}=A_{11}\\
+ 
+ ∂MSE/∂\omega_{41}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times A_{11} \times \sigma(Z_{22})\times (1-\sigma(Z_{22})) \\
+ ∂MSE/∂\omega_{42}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times A_{12} \times \sigma(Z_{22})\times (1-\sigma(Z_{22})\\(
+ 
+ 
+ 
+ ∂MSE/∂\omega_{41}=(1/3) \times [((0.276-0)\times0.416\times0.277\times0.44\times(1-0.44))+...\\((0.276-0.397)\times0.42\times0.299 \times0.454\times(1-0.454))+...\\
+ ((0.276-1)\times0.42\times0.322 \times0.463\times(1-0.463))]=-0.007\\
+ 
+ ∂MSE/∂\omega_{42}=-0.018 \\
+ 
+ 
 
-∂MSE/∂Y_{pred}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})\\
+ 
 
-∂Y_{pred}/∂A_{21}=∂(A_{21} \times w_{51} + A_{22} \times w_{52})/∂A_{21}=w_{51}\\
-∂A_{21}/∂Z_{21}=∂\sigma(Z_{21})/∂Z_{21}=\sigma(Z_{21})\times (1-\sigma(Z_{21}))\\
-∂Z_{21}/∂\omega_{31}=∂(A_{11} \times \omega_{31}+A_{12} \times \omega_{32}+b_{3})/∂\omega_{31}=A_{11}\\
+ 
+ ∂MSE/∂\omega_{11}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{21} \times ∂A_{21}/∂Z_{21} \times ∂Z_{21}/∂A_{11} \times ∂A_{11}/∂Z_{11} \times ∂Z_{11}/∂w_{11}\\
 
-\\ ∂MSE/∂\omega_{31}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{31} \times A_{11} \times \sigma(Z_{21})\times (1-\sigma(Z_{21})) \\
-∂MSE/∂\omega_{32}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times A_{12} \times \sigma(Z_{21})\times (1-\sigma(Z_{21})\\(
-sum\ considering\ all\ values\ of\ input\ variables)\\
-∂MSE/∂\omega_{31}=\\
-∂MSE/∂\omega_{32}=\\
+ ∂MSE/∂\omega_{12}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{21} \times ∂A_{21}/∂Z_{21} \times ∂Z_{21}/∂A_{11} \times ∂A_{11}/∂Z_{11} \times ∂Z_{11}/∂w_{12}\\
+ 
+ 
+ 
+ ∂MSE/∂\omega_{21}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂A_{12} \times ∂A_{12}/∂Z_{12} \times ∂Z_{12}/∂w_{21}\\
+ 
+ 
+ ∂MSE/∂\omega_{22}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂A_{12} \times ∂A_{12}/∂Z_{12} \times ∂Z_{12}/∂w_{22}\\
+ 
+  ∂MSE/∂\omega_{11}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times \omega_{31} \times \sigma(Z_{11})\times (1- \sigma(Z_{11})) \times X_{1} \\
+ 
+  ∂MSE/∂\omega_{12}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times \omega_{31} \times \sigma(Z_{11})\times (1- \sigma(Z_{11})) \times X_{2} \\
 
-∂MSE/∂\omega_{31}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{21} \times ∂A_{21}/∂Z_{21} \times ∂Z_{21}/∂\omega_{31}\\
-∂MSE/∂\omega_{32}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{21} \times ∂A_{21}/∂Z_{21} \times ∂Z_{21}/∂\omega_{32}\\
+∂MSE/∂\omega_{11}=(1/3) \times [(0.276-0) \times0.202 \times0.46\times (1-0.46) \times -0.688 \times0.277 \times (1-0.277)\times 0 +...\\
+(0.277-0.397) \times0.202 \times0.435\times (1-0.435) \times -0.688 \times0.299 \times (1-0.299)\times 0.5 +...\\
+(0.276-01) \times0.202 \times0.416\times (1-0.416) \times -0.688 \times0.322 \times (1-0.322)\times 1]=0.0019\\ 
+In\ the\ same\ way:\\
+∂MSE/∂\omega_{12}=0.0019
 
-∂MSE/∂Y_{pred}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})\\
-∂Y_{pred}/∂A_{21}=∂(A_{21} \times w_{51} + A_{22} \times w_{52})/∂A_{21}=w_{51}\\
-∂A_{21}/∂Z_{21}=∂\sigma(Z_{21})/∂Z_{21}=\sigma(Z_{21})\times (1-\sigma(Z_{21}))\\
-∂Z_{21}/∂\omega_{31}=∂(A_{11} \times \omega_{31}+A_{12} \times \omega_{32}+b_{3})/∂\omega_{31}=A_{11}\\
-
-∂MSE/∂\omega_{31}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times A_{11} \times \sigma(Z_{21})\times (1-\sigma(Z_{21})) \\
-∂MSE/∂\omega_{32}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times A_{12} \times \sigma(Z_{21})\times (1-\sigma(Z_{21})\\(
-sum\ considering\ all\ values\ of\ input\ variables)\\
-
-
-∂MSE/∂\omega_{31}=(1/3) \times [((0.276-0)*0.2*0.276*0.46*(1-0.46))+...\\((0.276-0.397)*0.2*0.276*0.46*(1-0.46))+((0.276-1)*0.2*0.276*0.46*(1-0.46))]=-0.003\\
-\\ In \ the\ way:\\
-∂MSE/∂\omega_{32}=-0.007\\
-
-
-∂MSE/∂\omega_{41}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂\omega_{41}\\
-∂MSE/∂\omega_{42}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂\omega_{42}\\
-
-∂MSE/∂Y_{pred}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})\\
-∂Y_{pred}/∂A_{22}=∂(A_{21} \times w_{51} + A_{22} \times w_{52})/∂A_{22}=w_{52}\\
-∂A_{22}/∂Z_{22}=∂\sigma(Z_{22})/∂Z_{22}=\sigma(Z_{22})\times (1-\sigma(Z_{22}))\\
-∂Z_{22}/∂\omega_{41}=∂(A_{11} \times \omega_{41}+A_{12} \times \omega_{42}+b_{4})/∂\omega_{41}=A_{11}\\
-
-∂MSE/∂\omega_{41}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times A_{11} \times \sigma(Z_{22})\times (1-\sigma(Z_{22})) \\
-∂MSE/∂\omega_{42}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times A_{12} \times \sigma(Z_{22})\times (1-\sigma(Z_{22})\\(
-sum\ considering\ all\ values\ of\ input\ variables)\\
-
-
-∂MSE/∂\omega_{41}=(1/3) \times [((0.276-0)*0.42*0.276*0.44*(1-0.44))+...\\((0.276-0.397)*0.42*0.276*0.44*(1-0.44))+((0.276-1)*0.42*0.276*0.44*(1-0.44))]=-0.003\\
-\\ In \ the\ way:\\
-∂MSE/∂\omega_{32}=-0.007\\
+ 
+ 
+  ∂MSE/∂b_{1}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times \omega_{31} \times \sigma(Z_{11})\times (1- \sigma(Z_{11})) \times 1 \\
+ 
+  ∂MSE/∂b_{2}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times \omega_{31} \times \sigma(Z_{11})\times (1- \sigma(Z_{11})) \times 1 \\
+ 
+  ∂MSE/∂b_{3}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times 1 \\
+ 
+  ∂MSE/∂b_{4}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times \ 
+ \sigma(Z_{22})\times (1-\sigma(Z_{22})) \times 1 \\
+ 
+ 
+ 
+ 
