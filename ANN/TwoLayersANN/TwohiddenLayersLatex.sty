@@ -127,7 +127,7 @@ Y_{pred_1}=0.202*0.460+0.416*0.440=0.276\\
 Y_{pred_2}=0.202*0.435+0.416*0.454=0.277\\
 Y_{pred_3}=0.202*0.416+0.416*0.463=0.277\\
 
-
+∂MSE/∂p
 
 MSE = (1/2n) \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}})^{2} :\\
 
@@ -216,7 +216,30 @@ In\ the\ same\ way:\\
 ∂MSE/∂\omega_{12}=0.0019
 
  
+
  
+∂MSE/∂\omega_{21}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂A_{12} \times ∂A_{12}/∂Z_{12} \times ∂Z_{12}/∂w_{21}\\
+∂MSE/∂\omega_{21}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times \ 
+\sigma(Z_{22})\times (1-\sigma(Z_{22})) \times \omega_{42} \times \sigma(Z_{12})\times (1- \sigma(Z_{12})) \times X_{1} \\
+
+
+∂MSE/∂\omega_{22}=∂MSE/∂Y_{pred} \times ∂Y_{pred}/∂A_{22} \times ∂A_{22}/∂Z_{22} \times ∂Z_{22}/∂A_{12} \times ∂A_{12}/∂Z_{12} \times ∂Z_{12}/∂w_{22}\\
+
+
+∂MSE/∂\omega_{22}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times \ 
+\sigma(Z_{22})\times (1-\sigma(Z_{22})) \times \omega_{42} \times \sigma(Z_{12})\times (1- \sigma(Z_{12})) \times X_{2} \\
+
+∂MSE/∂\omega_{21}=(1/3) \times [(0.276-0) \times0.416 \times0.44\times (1-0.44) \times 0.732 \times0.719\times (1-0.719)\times 0 +...\\
+(0.277-0.397) \times0.416 \times0.454\times (1-0.454) \times 0.732 \times0.816 \times (1-0.816)\times 0.5 +...\\
+(0.276-01) \times0.416 \times0.463\times (1-0.463) \times 0.732 \times0.885 \times (1-0.885)\times 1]=-0.0021\\ 
+In\ the\ same\ way:\\
+∂MSE/∂\omega_{22}=-0.0021 
+
+
+
+
+
+
   ∂MSE/∂b_{1}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
  \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times \omega_{31} \times \sigma(Z_{11})\times (1- \sigma(Z_{11})) \times 1 \\
  
@@ -232,3 +255,77 @@ In\ the\ same\ way:\\
  
  
  
+
+ ∂MSE/∂b_{1}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times \omega_{31} \times \sigma(Z_{11})\times (1- \sigma(Z_{11})) \times 1 \\
+ 
+  ∂MSE/∂b_{2}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times \omega_{31} \times \sigma(Z_{11})\times (1- \sigma(Z_{11})) \times 1 \\
+ 
+  ∂MSE/∂b_{3}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{51} \times \ 
+ \sigma(Z_{21})\times (1-\sigma(Z_{21})) \times 1 \\
+ 
+  ∂MSE/∂b_{4}=(1/n) \times \sum_{1}^{n}(Y_{\text{pred}}-Y_{\text{true}}) \times w_{52} \times \ 
+ \sigma(Z_{22})\times (1-\sigma(Z_{22})) \times 1 \\
+ 
+
+
+
+∂MSE/∂b_{1}=(1/3) \times [(0.276-0) \times0.202 \times0.46\times (1-0.46) \times -0.688 \times0.277 \times (1-0.277)\times 1 +...\\
+(0.277-0.397) \times0.202 \times0.435\times (1-0.435) \times -0.688 \times0.299 \times (1-0.299)\times 1 +...\\
+(0.276-01) \times0.202 \times0.416\times (1-0.416) \times -0.688 \times0.322 \times (1-0.322)\times 1]=0.0014\\ 
+In\ the\ same\ way:\\
+∂MSE/∂b_{2}=-0.0009\\
+∂MSE/∂b_{3}=-0.0092\\
+∂MSE/∂b_{4}=-0.020\\
+
+
+
+p=p-∂MSE/∂p\\
+\omega_{11}=\omega_{11}-\alpha(∂MSE/∂\omega_{11})\\
+\omega_{12}=\omega_{12}-\alpha(∂MSE/∂\omega_{12})\\
+\omega_{21}=\omega_{21}-\alpha(∂MSE/∂\omega_{21})\\
+\omega_{22}=\omega_{22}-\alpha(∂MSE/∂\omega_{22})\\
+\omega_{31}=\omega_{31}-\alpha(∂MSE/∂\omega_{31})\\
+\omega_{32}=\omega_{32}-\alpha(∂MSE/∂\omega_{32})\\
+\omega_{41}=\omega_{41}-\alpha(∂MSE/∂\omega_{41})\\
+\omega_{42}=\omega_{42}-\alpha(∂MSE/∂\omega_{42})\\
+\omega_{51}=\omega_{51}-\alpha(∂MSE/∂\omega_{51})\\
+b_{1}=b_{1}-\alpha(∂MSE/∂b_{1})\\
+b_{2}=b_{2}-\alpha(∂MSE/∂b_{2})\\
+b_{3}=b_{3}-\alpha(∂MSE/∂b_{3})\\
+b_{4}=b_{4}-\alpha(∂MSE/∂b_{4})
+
+p=p-∂MSE/∂p\\
+\omega_{11}=\omega_{11}-\alpha(∂MSE/∂\omega_{11})\\
+\omega_{12}=\omega_{12}-\alpha(∂MSE/∂\omega_{12})\\
+\omega_{21}=\omega_{21}-\alpha(∂MSE/∂\omega_{21})\\
+\omega_{22}=\omega_{22}-\alpha(∂MSE/∂\omega_{22})\\
+\omega_{31}=\omega_{31}-\alpha(∂MSE/∂\omega_{31})\\
+\omega_{32}=\omega_{32}-\alpha(∂MSE/∂\omega_{32})\\
+\omega_{41}=\omega_{41}-\alpha(∂MSE/∂\omega_{41})\\
+\omega_{42}=\omega_{42}-\alpha(∂MSE/∂\omega_{42})\\
+\omega_{51}=\omega_{51}-\alpha(∂MSE/∂\omega_{51})\\
+\omega_{52}=\omega_{52}-\alpha(∂MSE/∂\omega_{52})\\
+b_{1}=b_{1}-\alpha(∂MSE/∂b_{1})\\
+b_{2}=b_{2}-\alpha(∂MSE/∂b_{2})\\
+b_{3}=b_{3}-\alpha(∂MSE/∂b_{3})\\
+b_{4}=b_{4}-\alpha(∂MSE/∂b_{4})\\
+
+Updated\ parameters :\\
+\omega_{11}=-0.251-(0.1) \times 0.0019=\\
+\omega_{12}=-0.464-(0.1) \times 0.0019=\\
+\omega_{21}=-0.901-(0.1) \times (-0.0021)=\\
+\omega_{22}=-0.197-(0.1) \times (-0.0021)=\\
+\omega_{31}=-0.688-(0.1) \times (-0.003)=\\
+\omega_{32}=-0.884-(0.1) \times (-0.009)=\\
+\omega_{41}=-0.688-(0.1) \times (-0.007)=\\
+\omega_{42}=0.732-(0.1) \times (-0.018)=\\
+
+\omega_{51}=0.202-(0.1) \times (-0.075)=\\
+\omega_{52}=0.416-(0.1) \times (-0.089)=\\
+
+\ b_{1}=-0.959-(0.1) \times 0.0014=\\
+\ b_{2}=0.940-(0.1) \times (-0.0009)=\\
+\ b_{3}=0.665-(0.1) \times (-0.0092)=\\
+\ b_{4}=-0.575-(0.1) \times (-0.020)=\\
